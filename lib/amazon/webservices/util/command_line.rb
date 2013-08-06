@@ -55,11 +55,11 @@ EOF
     #id = @h.ask( 'What is your Access Key ID?' ) {|q| q.validate = /^[A-Z0-9]{20}$/ ; q.default = authId.to_s ; q.first_answer = default[:ID] }
     #key = @h.ask( 'What is your Secret Access Key?' ) {|q| q.validate = /^[\w\/+]{40}$/ ; q.default = authKey.to_s ; q.first_answer = default[:Key] }
 
-    @store.set(:Auth,ENV['AMAZON_ACCESS_KEY'],id)
-    @store.set(:Auth,ENV['AMAZON_SECRET_KEY'],key)
+    #@store.set(:Auth,ENV['AMAZON_ACCESS_KEY'],id)
+    #@store.set(:Auth,ENV['AMAZON_SECRET_KEY'],key)
 
     #should_save = @h.agree( 'Would you like to save your authentication information?' )
-    @store.save
+    #@store.save
   rescue
     raise "Unable to retrieve authentication information from the Console"
   end
