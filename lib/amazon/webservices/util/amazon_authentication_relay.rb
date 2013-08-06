@@ -61,7 +61,7 @@ class AmazonAuthenticationRelay
       # didn't get passed in, so load from config or go interactive
       cmd = CommandLine.new
       cmd.checkAuthConfig
-      return cmd.authId, cmd.authKey
+      return ENV['AMAZON_ACCESS_KEY'], ENV['AMAZON_SECRET_KEY']
     end
   end
 
