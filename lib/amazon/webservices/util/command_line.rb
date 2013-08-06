@@ -135,17 +135,17 @@ EOF
     opts = parseOptions
 
     case opts[:Mode]
-    when :Interactive
+    #when :Interactive
 
-      @h.say "\n<%= color('Welcome to',BOLD) %> <%= color('RubyAWS #{RubyAWS::VERSION}',BOLD,RED) %>"
-      @h.say "This version includes SDK extensions for: <%= list (#{SDKS.inspect}.collect {|a| color(a,BOLD)}), :inline, ' and ' %>\n\n"
+     # @h.say "\n<%= color('Welcome to',BOLD) %> <%= color('RubyAWS #{RubyAWS::VERSION}',BOLD,RED) %>"
+      #@h.say "This version includes SDK extensions for: <%= list (#{SDKS.inspect}.collect {|a| color(a,BOLD)}), :inline, ' and ' %>\n\n"
 
-      checkAuthConfig
+      #checkAuthConfig
 
-      default_menu
+      #default_menu
     when :Auth
 
-      getAuthConfig( :Key => opts[:Key], :ID => opts[:ID] )
+      getAuthConfig( :Key => ENV['AMAZON_ACCESS_KEY'], :ID => ENV['AMAZON_SECRET_KEY'] )
 
     end
   end
