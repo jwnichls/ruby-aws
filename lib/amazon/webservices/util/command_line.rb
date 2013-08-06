@@ -65,10 +65,10 @@ EOF
   end
 
   def authKey
-    @store.get(:Auth,:SecretAccessKey)
+    ENV['AMAZON_ACCESS_KEY']
   end
   def authId
-    @store.get(:Auth,:AccessKeyId)
+    ENV['AMAZON_SECRET_KEY']
   end
 
   def useColor?
