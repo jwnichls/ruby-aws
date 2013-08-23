@@ -57,11 +57,11 @@ class AmazonAuthenticationRelay
       raise "Missing AWSAccessKeyId" if args[:AWSAccessKeyId].nil?
       raise "Missing AWSAccessKey" if args[:AWSAccessKey].nil?
       return args[:AWSAccessKeyId], args[:AWSAccessKey]
-    else
-      # didn't get passed in, so load from config or go interactive
-      cmd = CommandLine.new
-      cmd.checkAuthConfig
+    elsif ENV['AMAZON_ACCESS_KEY'] and ENV['AMAZON_SECRET_KEY']
       return ENV['AMAZON_ACCESS_KEY'], ENV['AMAZON_SECRET_KEY']
+    else
+      cmd = CommandLine.new
+      cmd.checkuthConfig
     end
   end
 
