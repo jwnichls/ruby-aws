@@ -66,6 +66,18 @@ class DataReader
     }
   end
 
+  def parse_properties( raw_data )
+    processed = {}
+    for line in raw_data.split(/\n\r?/)
+      next if line =~ /^\W*(#.*)?$/ # ignore lines beginning w/ comments
+      if md = /^([^:=]+)[=:](.*)/.match(line)
+        processed[md[1].strip] = correct_type(md[2].strip)
+      end
+    end
+    processed.extend HashNesting
+    return processed.unnest
+  end
+
   def self.load( filename, format=:Tabular )
     reader = DataReader.new()
     reader.load( filename, format )
@@ -74,6 +86,11 @@ class DataReader
   def self.save( filename, data, format=:Tabular, force_headers=false )
     reader = DataReader.new( data )
     reader.save( filename, format, force_headers )
+  end
+  
+  def self.parse_properties( raw_data )
+    reader = DataReader.new(nil)
+    return reader.parse_properties(raw_data)
   end
   
   private
@@ -137,18 +154,6 @@ class DataReader
       end
     }
     return buff.join("\n")
-  end
-
-  def parse_properties( raw_data )
-    processed = {}
-    for line in raw_data.split(/\n\r?/)
-      next if line =~ /^\W*(#.*)?$/ # ignore lines beginning w/ comments
-      if md = /^([^:=]+)[=:](.*)/.match(line)
-        processed[md[1].strip] = correct_type(md[2].strip)
-      end
-    end
-    processed.extend HashNesting
-    return processed.unnest
   end
   
   def generate_properties( raw_data )
